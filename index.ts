@@ -9,3 +9,7 @@ myRBTree.insert(30);
 myRBTree.insert(50);
 myRBTree.insert(45);
 myRBTree.printAll();
+myRBTree.search(52);
+myRBTree.inorder();
+
+//Jose Antonio Ronquillo Meza 1547223

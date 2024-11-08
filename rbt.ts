@@ -3,10 +3,12 @@ import { NodeRBT } from "./node_rbt";
 export class RBTree {
     private root: NodeRBT;
     private leaf: NodeRBT;
+    private find: boolean;
 
     constructor() {
         this.leaf = new NodeRBT(0, true);
         this.root = this.leaf;
+        this.find = false;
     }
 
     private fixInsert(testNode: NodeRBT): void {
@@ -132,5 +134,45 @@ export class RBTree {
             return;
         // corregir inserción
         this.fixInsert(newNode);
+    }
+
+    public search_it(data:number , current:NodeRBT){
+        if(current == undefined){
+            return
+        }
+        if (data == current.getData()){
+            this.find = true;
+        }
+
+        this.search_it(data,current.getLeftChild());
+        this.search_it(data,current.getRightChild());
+    }
+
+    public search(data:number){
+        this.search_it(data,this.root)
+        if(this.find){
+            console.log("Se encontro el elemento");
+            this.find = false;
+        } else {
+            console.log("El elemento no pertenece al arbol");
+        }
+    }
+
+    public inorder_rs(current:NodeRBT){
+        if(current == undefined){
+            return
+        }
+        else {
+            if(current.getData()!== 0){
+                console.log(current.getData());
+            }
+        }
+
+        this.inorder_rs(current.getLeftChild());
+        this.inorder_rs(current.getRightChild());
+    }
+
+    public inorder(){
+        this.inorder_rs(this.root);
     }
 }
